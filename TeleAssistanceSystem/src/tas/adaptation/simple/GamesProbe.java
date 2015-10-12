@@ -15,18 +15,19 @@ public class GamesProbe implements WorkflowProbeInterface {
 
 	@Override
 	public void workflowStarted(String qosRequirement, Object[] params) {
-	    System.err.println("Workflow Started monitoring");
+	    System.err.println("GamesProbe notifies workflow started");
 	    //Log.addLog("WorkflowStarted", "Workflow Started monitoring");
 	}
 
 	@Override
 	public void workflowEnded(Object result, String qosRequirement, Object[] params) {
-	    System.err.println("Workflow Ended");
+	    System.err.println("GamesProbe notifies workflow ended");
 	}
 
 	@Override
 	public void serviceOperationInvoked(ServiceDescription service, String opName, Object[] params) {
-
+		 System.err.println("GamesProbe notifies service invocation failed: " + service.getServiceName());
+		 myAdaptationEngine.handleServiceInvocationFailure();
 	}
 
 	@Override
@@ -36,7 +37,7 @@ public class GamesProbe implements WorkflowProbeInterface {
 
 	@Override
 	public void serviceOperationTimeout(ServiceDescription service, String opName, Object[] params) {
-	    System.err.println("Service Failed: " + service.getServiceName());
+	    System.err.println("GamesProbe notifies service failed: " + service.getServiceName());
 	    
 	    // Remove service from cache
 	    myAdaptationEngine.handleServiceFailure(service, opName);
@@ -44,7 +45,7 @@ public class GamesProbe implements WorkflowProbeInterface {
 	
 	@Override
 	public void serviceNotFound(String serviceType, String opName){
-	    System.err.println(serviceType + opName + "Not found");
+	    System.err.println("GamesProbe notifies service operation not found: " + serviceType + opName);
 	    myAdaptationEngine.handleServiceNotFound(serviceType, opName);
 	}
 }

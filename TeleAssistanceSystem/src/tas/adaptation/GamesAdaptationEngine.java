@@ -33,15 +33,20 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    }
 
 	    public void handleServiceNotFound(String serviceType, String opName) {
-	    	myEffector.refreshAllServices(serviceType, opName);
+	    	this.myEffector.refreshAllServices(serviceType, opName);
 	    	System.out.println("Handling service not found");
 	    	pc.display();
+	    }
+	    
+	    public void handleServiceInvocationFailure(){
+	    	System.out.println("Handling service invocation failure");
+	    	this.myEffector.refreshAllServices();
 	    }
 
 	    @Override
 	    public void start() {
 	    	assistanceService.getWorkflowProbe().register(myProbe);
-	    	myEffector.refreshAllServices();
+	    	this.myEffector.refreshAllServices();
 	    }
 	    
 	    @Override

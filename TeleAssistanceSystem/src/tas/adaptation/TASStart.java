@@ -25,6 +25,7 @@ import tas.services.qos.MinCostQoS;
 import tas.services.qos.PreferencesQoS;
 import tas.services.qos.ReliabilityQoS;
 
+
 public class TASStart {
 
     private HashMap<String, AdaptationEngine> adaptationEngines = new LinkedHashMap<>();
@@ -196,6 +197,7 @@ public class TASStart {
 	monitor = new AssistanceServiceCostProbe();
 	assistanceService.getCostProbe().register(monitor);
 	assistanceService.getWorkflowProbe().register(monitor);
+	
 	//assistanceService.getWorkflowProbe().register(new AssistanceServiceDelayProbe());
 	// assistanceService.getServiceInvocationProbe().register(monitor);
 	assistanceService.addQosRequirement("ReliabilityQoS", new ReliabilityQoS());

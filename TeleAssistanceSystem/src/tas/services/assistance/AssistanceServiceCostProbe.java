@@ -101,7 +101,7 @@ public class AssistanceServiceCostProbe implements WorkflowProbeInterface,CostPr
 	@Override
 	public void serviceCost(String serviceName, String opName, double cost) {
 		// TODO Auto-generated method stub
-		System.out.println("Serivice Cost: "+cost);
+		System.out.println("Service Cost: "+cost);
 		String fullOperation=serviceName+"."+opName;
 		Double begin=delays.get(fullOperation)*1.0;
 		Double end=System.currentTimeMillis()*1.0;
