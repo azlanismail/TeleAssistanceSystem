@@ -1,16 +1,51 @@
 package tas.adaptation;
 
+
+import service.adaptation.effector.WorkflowEffector;
+import service.auxiliary.ServiceDescription;
+import synthesis.PrismChecker;
+import tas.adaptation.simple.GamesProbe;
+import tas.services.assistance.AssistanceService;
+import synthesis.PrismChecker;
+
+
 public class GamesAdaptationEngine implements AdaptationEngine {
 
-	  @Override
-	    public void start() {
-		// TODO Auto-generated method stub
-		
+	    GamesProbe myProbe;
+	    WorkflowEffector myEffector;
+	    AssistanceService assistanceService;
+	    PrismChecker pc;
+      
+
+	    public GamesAdaptationEngine(AssistanceService assistanceService) {
+	    	this.assistanceService = assistanceService;
+	    	this.pc = new PrismChecker();
+	    	myProbe = new GamesProbe();
+	    	myProbe.connect(this);
+	    	myEffector = new WorkflowEffector(assistanceService);
+	    }
+	    
+	    
+	    public void handleServiceFailure(ServiceDescription service, String opName) {
+	    	this.myEffector.removeService(service);
+	    	System.out.println("Handling service failure");
+	    	pc.display();
+	    }
+
+	    public void handleServiceNotFound(String serviceType, String opName) {
+	    	myEffector.refreshAllServices(serviceType, opName);
+	    	System.out.println("Handling service not found");
+	    	pc.display();
 	    }
 
 	    @Override
+	    public void start() {
+	    	assistanceService.getWorkflowProbe().register(myProbe);
+	    	myEffector.refreshAllServices();
+	    }
+	    
+	    @Override
 	    public void stop() {
-		// TODO Auto-generated method stub
-		
+	    	assistanceService.getWorkflowProbe().unRegister(myProbe);
 	    }
 }

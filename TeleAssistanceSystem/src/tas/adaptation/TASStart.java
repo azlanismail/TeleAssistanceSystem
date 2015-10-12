@@ -111,7 +111,7 @@ public class TASStart {
 
 	adaptationEngines.put("No Adaptation", new DefaultAdaptationEngine());
 	adaptationEngines.put("Simple Adaptation", new MyAdaptationEngine(assistanceService));
-	adaptationEngines.put("Games-based Adaptation", new DefaultAdaptationEngine());
+	adaptationEngines.put("Games-based Adaptation", new GamesAdaptationEngine(assistanceService));
     }
 
     public HashMap<String, AdaptationEngine> getAdaptationEngines() {
