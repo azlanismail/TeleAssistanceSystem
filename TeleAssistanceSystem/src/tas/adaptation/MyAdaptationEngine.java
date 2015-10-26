@@ -4,7 +4,7 @@
 
 package tas.adaptation;
 
-import service.adaptation.effector.WorkflowEffector;
+import service.adaptation.effectors.WorkflowEffector;
 import service.auxiliary.ServiceDescription;
 import tas.adaptation.simple.MyProbe;
 import tas.services.assistance.AssistanceService;

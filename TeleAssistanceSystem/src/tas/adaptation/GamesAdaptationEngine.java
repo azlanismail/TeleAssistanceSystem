@@ -1,7 +1,7 @@
 package tas.adaptation;
 
 
-import service.adaptation.effector.WorkflowEffector;
+import service.adaptation.effectors.WorkflowEffector;
 import service.auxiliary.ServiceDescription;
 import synthesis.PrismChecker;
 import tas.adaptation.simple.GamesProbe;

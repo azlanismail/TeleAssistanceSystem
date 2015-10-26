@@ -10,7 +10,7 @@ import java.util.Random;
 import profile.InputProfileValue;
 import profile.InputProfileVariable;
 import profile.ProfileExecutor;
-import service.adaptation.effector.WorkflowEffector;
+import service.adaptation.effectors.WorkflowEffector;
 import service.atomic.AtomicService;
 import service.composite.CompositeServiceClient;
 import service.registry.ServiceRegistry;
