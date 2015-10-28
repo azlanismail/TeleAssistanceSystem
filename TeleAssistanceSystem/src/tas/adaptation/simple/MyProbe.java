@@ -42,7 +42,6 @@ public class MyProbe implements WorkflowProbeInterface {
 	@Override
 	public void serviceOperationTimeout(ServiceDescription service, String opName, Object[] params) {
 	    System.err.println("Service Failed: " + service.getServiceName());
-	    
 	    // Remove service from cache
 	    myAdaptationEngine.handleServiceFailure(service, opName);
 	}

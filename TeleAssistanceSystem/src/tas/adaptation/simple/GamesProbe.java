@@ -26,8 +26,8 @@ public class GamesProbe implements WorkflowProbeInterface {
 
 	@Override
 	public void serviceOperationInvoked(ServiceDescription service, String opName, Object[] params) {
-		 System.err.println("GamesProbe notifies service invocation failed: " + service.getServiceName());
-		 myAdaptationEngine.handleServiceInvocationFailure();
+	//	 System.err.println("GamesProbe notifies service invocation failed: " + service.getServiceName());
+	//	 myAdaptationEngine.handleServiceInvocationFailure();
 	}
 
 	@Override

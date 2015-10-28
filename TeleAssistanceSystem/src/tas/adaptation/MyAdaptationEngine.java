@@ -27,7 +27,6 @@ public class MyAdaptationEngine implements AdaptationEngine {
     	myEffector = new WorkflowEffector(assistanceService);
     }
     
-    
     public void handleServiceFailure(ServiceDescription service, String opName) {
     	this.myEffector.removeService(service);
     }
@@ -36,15 +35,15 @@ public class MyAdaptationEngine implements AdaptationEngine {
     	myEffector.refreshAllServices(serviceType, opName);
     }
     
-    public void handleServiceInvocationFailure(){
-    	System.out.println("Handling service invocation failure");
-    	this.myEffector.refreshAllServices();
-    }
+  //  public void handleServiceInvocationFailure(){
+  //  	System.out.println("Handling service invocation failure");
+  //  	this.myEffector.refreshAllServices();
+  //  }
     
-    public void handleServiceOperationTimeout(){
-    	System.out.println("Handling service operation timeout");
-    	this.myEffector.refreshAllServices();
-    }
+ //   public void handleServiceOperationTimeout(){
+ //   	System.out.println("Handling service operation timeout");
+ //   	this.myEffector.refreshAllServices();
+ //   }
 
     @Override
     public void start() {
