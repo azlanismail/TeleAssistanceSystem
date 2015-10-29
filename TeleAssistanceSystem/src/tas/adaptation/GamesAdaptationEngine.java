@@ -24,7 +24,7 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	myProbe = new GamesProbe();
 	    	myProbe.connect(this);
 	    	myEffector = new WorkflowEffector(assistanceService);
-	    	//plan = new Planner();
+	    	plan = new Planner();
 			//plan.synthesis();
 	      	
 	    }
@@ -33,13 +33,15 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    public void handleServiceFailure(ServiceDescription service, String opName) {
 	    	//this.myEffector.removeService(service);
 	    	System.err.println("Handling service failure by games-based adaptation");
-	    	mapStratwithEffector(service, opName); 
+	    	//mapStratwithEffector(service, opName); 
+	    	mapStratwithEffector(service.getServiceType(), opName);
 	    	
 	    }
 
 	    public void handleServiceNotFound(String serviceType, String opName) {
-	    	this.myEffector.refreshAllServices(serviceType, opName);
-	    	System.err.println("Handling service not found");
+	    	//this.myEffector.refreshAllServices(serviceType, opName);
+	    	System.err.println("Handling service not found by games-based adaptation");
+	    	mapStratwithEffector(serviceType, opName);
 	    }
 	    
 	 //   public void handleServiceInvocationFailure(){
@@ -52,16 +54,16 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	 //   	mapStratwithEffector();    	
 	 //   }
 	   
-	    public void mapStratwithEffector(ServiceDescription service, String opName){
+	    public void mapStratwithEffector(String serviceType, String opName){
 	    	int ch = -1;
 	    	Random rand = new Random();
-	    	//plan.synthesis();
+	    	plan.synthesis();
 	    	//ch = plan.getStrategy();
 	    	ch = rand.nextInt(1);
 	    	if (ch == 0) {
-	    		myEffector.removeService(service);
+	    		myEffector.refreshAllServices();
 	    	}else if (ch == 1) {
-	    		myEffector.refreshAllServices(service.getServiceType(), opName);
+	    		myEffector.refreshAllServices(serviceType, opName);
 	    	}else
 	    	{
 	    		System.err.println("no action selected");
