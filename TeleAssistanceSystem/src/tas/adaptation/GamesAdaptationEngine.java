@@ -1,6 +1,7 @@
 package tas.adaptation;
 
 
+import java.io.FileNotFoundException;
 import java.util.Random;
 
 import adapt.plan.Planner;
@@ -58,11 +59,18 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	int ch = -1;
 	    	Random rand = new Random();
 	    	plan.synthesis();
-	    	//ch = plan.getStrategy();
-	    	ch = rand.nextInt(1);
-	    	if (ch == 0) {
+	    	try {
+				ch = plan.getStrategy();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	
+	    	//ch = rand.nextInt(1);
+	    	
+	    	if (ch == 1) {
 	    		myEffector.refreshAllServices();
-	    	}else if (ch == 1) {
+	    	}else if (ch == 3) {
 	    		myEffector.refreshAllServices(serviceType, opName);
 	    	}else
 	    	{
