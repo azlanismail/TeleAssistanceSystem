@@ -60,7 +60,7 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	Random rand = new Random();
 	    	plan.synthesis();
 	    	try {
-				ch = plan.getStrategy();
+				ch = plan.getAdaptStrategy();
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
