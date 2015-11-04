@@ -38,7 +38,6 @@ public class GamesProbe implements WorkflowProbeInterface {
 	@Override
 	public void serviceOperationTimeout(ServiceDescription service, String opName, Object[] params) {
 	    System.err.println("GamesProbe notifies service failed: " + service.getServiceName());
-	    
 	    // Remove service from cache
 	    myAdaptationEngine.handleServiceFailure(service, opName);
 	}

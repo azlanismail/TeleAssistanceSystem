@@ -17,6 +17,8 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    GamesProbe myProbe;
 	    WorkflowEffector myEffector;
 	    AssistanceService assistanceService;
+	    ServiceDescription oldDescription, newDescription;
+	    String serviceType, operationName;
 	    Planner plan;
       
 
@@ -26,24 +28,22 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	myProbe.connect(this);
 	    	myEffector = new WorkflowEffector(assistanceService);
 	    	plan = new Planner();
-			//plan.synthesis();
-	      	
 	    }
 	    
 	    
 	    public void handleServiceFailure(ServiceDescription service, String opName) {
-	    	//this.myEffector.removeService(service);
 	    	System.err.println("Handling service failure by games-based adaptation");
-	    	//mapStratwithEffector(service, opName); 
-	    	mapStratwithEffector(service.getServiceType(), opName);
-	    	
+	    	this.myEffector.removeService(service);
 	    }
 
 	    public void handleServiceNotFound(String serviceType, String opName) {
-	    	//this.myEffector.refreshAllServices(serviceType, opName);
 	    	System.err.println("Handling service not found by games-based adaptation");
-	    	mapStratwithEffector(serviceType, opName);
+	    	this.serviceType = serviceType;
+	    	this.operationName = opName;
+	    	mapStrategywithEffector();
 	    }
+	    
+	    
 	    
 	 //   public void handleServiceInvocationFailure(){
 	 //   	System.err.println("Handling service invocation failure");
@@ -55,27 +55,26 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	 //   	mapStratwithEffector();    	
 	 //   }
 	   
-	    public void mapStratwithEffector(String serviceType, String opName){
+	    public void mapStrategywithEffector(){
 	    	int ch = -1;
-	    	Random rand = new Random();
 	    	plan.synthesis();
 	    	try {
-				ch = plan.getAdaptStrategy();
+				ch = plan.getAdaptStrategyfromFile();
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    	
-	    	//ch = rand.nextInt(1);
-	    	
-	    	if (ch == 1) {
-	    		myEffector.refreshAllServices();
-	    	}else if (ch == 3) {
-	    		myEffector.refreshAllServices(serviceType, opName);
-	    	}else
-	    	{
-	    		System.err.println("no action selected");
-	    	}	
+	    	switch (ch) {
+	    	case 0: myEffector.refreshAllServices();
+	    			break;
+	    	case 1: myEffector.refreshAllServices(this.serviceType, this.operationName);
+	    			break;
+	    //	case 2: myEffector.updateServiceDescription(oldDes, newDes);
+	    //			break;
+	    	default: System.err.println("no action selected");
+	    			 break;
+	    	}
 	    }
 	    
 
