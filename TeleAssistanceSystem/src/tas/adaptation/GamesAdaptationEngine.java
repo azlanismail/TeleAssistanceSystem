@@ -35,7 +35,10 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    
 	    public void handleServiceFailure(ServiceDescription service, String opName) {
 	    	System.err.println("Handling service failure by games-based adaptation");
-	    	this.myEffector.removeService(service);
+	    	//this.myEffector.removeService(service);
+	    	this.serviceType = service.getServiceType();
+	    	this.operationName = opName;
+	    	mapStrategywithEffector();
 	    }
 
 	    public void handleServiceNotFound(String serviceType, String opName) {
@@ -57,14 +60,30 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	 //   	mapStratwithEffector();    	
 	 //   }
 	   
+	    /**
+	     * Objective: Provide the input for probe type
+	     * @param probeTy
+	     */
 	    public void setProbe(String probeTy){
 	    	if (probeTy.equalsIgnoreCase("ServiceFailure")) {
-	    		plan.setConstantsforProbe(0);
+	    		plan.setConstantsProbe(0);
 	    	}
 	    	if (probeTy.equalsIgnoreCase("ServiceNotFound")) {
-	    		plan.setConstantsforProbe(1);
+	    		plan.setConstantsProbe(1);
 	    	}
 	    }
+	    
+	    public void setServiceType(String serviceTy){
+	    	System.out.println("The detected service type is"+serviceTy);
+	    	if (serviceTy.equalsIgnoreCase("MedicalAnalysisService"))
+	    		plan.setConstantsServiceType(1);
+	    	if (serviceTy.equalsIgnoreCase("DrugService"))
+	    		plan.setConstantsServiceType(2);
+	    	if (serviceTy.equalsIgnoreCase("AlarmService"))
+	    		plan.setConstantsServiceType(3);
+	    }
+	    	
+	    
 	    
 	    public void mapStrategywithEffector(){
 	    	int ch = -1;
