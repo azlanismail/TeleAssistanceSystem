@@ -32,7 +32,7 @@ public class GamesProbe implements WorkflowProbeInterface {
 
 	@Override
 	public void serviceOperationReturned(ServiceDescription service, Object result, String opName, Object[] params) {
-
+		
 	}
 
 	@Override
@@ -40,11 +40,13 @@ public class GamesProbe implements WorkflowProbeInterface {
 	    System.err.println("GamesProbe notifies service failed: " + service.getServiceName());
 	    // Remove service from cache
 	    myAdaptationEngine.handleServiceFailure(service, opName);
+	    myAdaptationEngine.setProbe("ServiceFailure");
 	}
 	
 	@Override
 	public void serviceNotFound(String serviceType, String opName){
 	    System.err.println("GamesProbe notifies service operation not found: " + serviceType + opName);
 	    myAdaptationEngine.handleServiceNotFound(serviceType, opName);
+	    myAdaptationEngine.setProbe("ServiceNotFound");
 	}
 }

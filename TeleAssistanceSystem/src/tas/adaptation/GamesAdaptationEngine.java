@@ -18,8 +18,10 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    WorkflowEffector myEffector;
 	    AssistanceService assistanceService;
 	    ServiceDescription oldDescription, newDescription;
-	    String serviceType, operationName;
 	    Planner plan;
+	    
+	    String serviceType, operationName;
+	    String probeType;
       
 
 	    public GamesAdaptationEngine(AssistanceService assistanceService) {
@@ -55,6 +57,15 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	 //   	mapStratwithEffector();    	
 	 //   }
 	   
+	    public void setProbe(String probeTy){
+	    	if (probeTy.equalsIgnoreCase("ServiceFailure")) {
+	    		plan.setConstantsforProbe(0);
+	    	}
+	    	if (probeTy.equalsIgnoreCase("ServiceNotFound")) {
+	    		plan.setConstantsforProbe(1);
+	    	}
+	    }
+	    
 	    public void mapStrategywithEffector(){
 	    	int ch = -1;
 	    	plan.synthesis();
