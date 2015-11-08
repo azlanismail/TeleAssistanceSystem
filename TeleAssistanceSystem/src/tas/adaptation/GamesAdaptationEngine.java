@@ -87,7 +87,7 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    
 	    public void mapStrategywithEffector(){
 	    	int ch = -1;
-	    	plan.synthesis();
+	    	plan.generatePlan();
 	    	try {
 				ch = plan.getAdaptStrategyfromFile();
 			} catch (FileNotFoundException e) {

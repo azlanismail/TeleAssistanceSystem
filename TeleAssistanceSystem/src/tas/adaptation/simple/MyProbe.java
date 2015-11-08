@@ -31,17 +31,18 @@ public class MyProbe implements WorkflowProbeInterface {
 
 	@Override
 	public void serviceOperationInvoked(ServiceDescription service, String opName, Object[] params) {
-
+		System.err.println("Service Operation Invoked: " + service.getServiceName());
+		//myAdaptationEngine.handleServiceFailure(service, opName);
 	}
 
 	@Override
 	public void serviceOperationReturned(ServiceDescription service, Object result, String opName, Object[] params) {
-
+		System.err.println("Service Operation Returned: " + service.getServiceName());
 	}
 
 	@Override
 	public void serviceOperationTimeout(ServiceDescription service, String opName, Object[] params) {
-	    System.err.println("Service Failed: " + service.getServiceName());
+	    System.err.println("Service Operation Timeout: " + service.getServiceName());
 	    // Remove service from cache
 	    myAdaptationEngine.handleServiceFailure(service, opName);
 	}

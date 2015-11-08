@@ -29,21 +29,14 @@ public class MyAdaptationEngine implements AdaptationEngine {
     
     public void handleServiceFailure(ServiceDescription service, String opName) {
     	this.myEffector.removeService(service);
+    //	this.myEffector.refreshAllServices();
+    	myEffector.refreshAllServices(service.getServiceType(), opName);
     }
 
     public void handleServiceNotFound(String serviceType, String opName) {
     	myEffector.refreshAllServices(serviceType, opName);
     }
-    
-  //  public void handleServiceInvocationFailure(){
-  //  	System.out.println("Handling service invocation failure");
-  //  	this.myEffector.refreshAllServices();
-  //  }
-    
- //   public void handleServiceOperationTimeout(){
- //   	System.out.println("Handling service operation timeout");
- //   	this.myEffector.refreshAllServices();
- //   }
+     
 
     @Override
     public void start() {

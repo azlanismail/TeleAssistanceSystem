@@ -42,6 +42,8 @@ public class TASStart {
     protected MedicalAnalysisService medicalAnalysis1;
     protected MedicalAnalysisService medicalAnalysis2;
     protected MedicalAnalysisService medicalAnalysis3;
+    protected MedicalAnalysisService medicalAnalysis4;
+    protected MedicalAnalysisService medicalAnalysis5;
 
     protected DrugService drugService;
     
@@ -152,12 +154,13 @@ public class TASStart {
 
 	// Medical Analysis Services
 	medicalAnalysis1 = new MedicalAnalysisService("MedicalService1", "service.medical1");
-	medicalAnalysis1.getServiceDescription().getCustomProperties().put("preferred", false);
+	//medicalAnalysis1.getServiceDescription().getCustomProperties().put("preferred", false);
 	medicalAnalysis1.getServiceDescription().getCustomProperties().put("Cost", 4.0);
 	medicalAnalysis1.getServiceDescription().setOperationCost("analyzeData", 4.0);
+	medicalAnalysis1.getServiceDescription().getCustomProperties().put("ResponseTime", 22);
+	medicalAnalysis1.getServiceDescription().setResponseTime(22);
 	medicalAnalysis1.getServiceDescription().getCustomProperties().put("FailureRate", 0.12);
 	medicalAnalysis1.addServiceProfile(new ServiceFailureProfile(0.12));
-	//medicalAnalysis1.addServiceProfile(new ServiceFailureProfile(0.12));
 	medicalAnalysis1.startService();
 	medicalAnalysis1.register();
 
@@ -165,19 +168,46 @@ public class TASStart {
 	//medicalAnalysis2.getServiceDescription().getCustomProperties().put("preferred", true);
 	medicalAnalysis2.getServiceDescription().getCustomProperties().put("Cost", 14.0);
 	medicalAnalysis2.getServiceDescription().setOperationCost("analyzeData", 14.0);
+	medicalAnalysis2.getServiceDescription().getCustomProperties().put("ResponseTime", 27);
+	medicalAnalysis2.getServiceDescription().setResponseTime(27);
 	medicalAnalysis2.getServiceDescription().getCustomProperties().put("FailureRate", 0.07);
 	medicalAnalysis2.addServiceProfile(new ServiceFailureProfile(0.07));
 	medicalAnalysis2.startService();
 	medicalAnalysis2.register();
 
 	medicalAnalysis3 = new MedicalAnalysisService("MedicalService3", "service.medical3");
-	medicalAnalysis3.getServiceDescription().getCustomProperties().put("preferred", false);
+	//medicalAnalysis3.getServiceDescription().getCustomProperties().put("preferred", false);
 	medicalAnalysis3.getServiceDescription().getCustomProperties().put("Cost", 2.15);
 	medicalAnalysis3.getServiceDescription().setOperationCost("analyzeData", 2.15);
+	medicalAnalysis3.getServiceDescription().getCustomProperties().put("ResponseTime", 31);
+	medicalAnalysis3.getServiceDescription().setResponseTime(31);
 	medicalAnalysis3.getServiceDescription().getCustomProperties().put("FailureRate", 0.18);
 	medicalAnalysis3.addServiceProfile(new ServiceFailureProfile(0.18));
 	medicalAnalysis3.startService();
 	medicalAnalysis3.register();
+	
+	medicalAnalysis4 = new MedicalAnalysisService("MedicalService4", "service.medical4");
+	//medicalAnalysis4.getServiceDescription().getCustomProperties().put("preferred", false);
+	medicalAnalysis4.getServiceDescription().getCustomProperties().put("Cost", 7.3);
+	medicalAnalysis4.getServiceDescription().setOperationCost("analyzeData", 7.3);
+	medicalAnalysis4.getServiceDescription().getCustomProperties().put("ResponseTime", 29);
+	medicalAnalysis4.getServiceDescription().setResponseTime(29);
+	medicalAnalysis4.getServiceDescription().getCustomProperties().put("FailureRate", 0.25);
+	medicalAnalysis4.addServiceProfile(new ServiceFailureProfile(0.25));
+	medicalAnalysis4.startService();
+	medicalAnalysis4.register();
+	
+	medicalAnalysis5 = new MedicalAnalysisService("MedicalService5", "service.medical5");
+	//medicalAnalysis5.getServiceDescription().getCustomProperties().put("preferred", false);
+	medicalAnalysis5.getServiceDescription().getCustomProperties().put("Cost", 11.9);
+	medicalAnalysis5.getServiceDescription().setOperationCost("analyzeData", 11.9);
+	medicalAnalysis5.getServiceDescription().getCustomProperties().put("ResponseTime", 20);
+	medicalAnalysis5.getServiceDescription().setResponseTime(20);
+	medicalAnalysis5.getServiceDescription().getCustomProperties().put("FailureRate", 0.05);
+	medicalAnalysis5.addServiceProfile(new ServiceFailureProfile(0.05));
+	medicalAnalysis5.startService();
+	medicalAnalysis5.register();
+	
 
 	// Drug Services
 	drugService = new DrugService("DrugService", "service.drug");
@@ -206,7 +236,7 @@ public class TASStart {
 	
 	workflowEffector = new WorkflowEffector(assistanceService);
 	
-	this.addAllServices(alarm1,alarm2,alarm3,medicalAnalysis1,medicalAnalysis2,medicalAnalysis3,drugService);
+	this.addAllServices(alarm1,alarm2,alarm3,medicalAnalysis1,medicalAnalysis2,medicalAnalysis3,medicalAnalysis4,medicalAnalysis5,drugService);
 	
 	this.serviceProfileClasses.add(ServiceFailureProfile.class);
 	this.serviceProfileClasses.add(ServiceDelayProfile.class);
@@ -260,7 +290,7 @@ public class TASStart {
 					}
 	    		}
 	    	}*/
-	    	    	
+	    System.out.println("Executing workflow :"+(currentSteps+1));	    	
 		double probability = rand.nextDouble();
 		double valueProbability = 0;
 		for (int j = 0; j < values.size(); j++) {
