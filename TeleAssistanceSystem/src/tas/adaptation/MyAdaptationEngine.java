@@ -4,8 +4,11 @@
 
 package tas.adaptation;
 
+import java.util.List;
+
 import profile.ProfileExecutor;
 import service.adaptation.effectors.CacheEffector;
+import service.adaptation.effectors.ConfigurationEffector;
 import service.adaptation.effectors.WorkflowEffector;
 import service.auxiliary.ServiceDescription;
 import tas.adaptation.simple.MyProbe;
@@ -22,7 +25,10 @@ public class MyAdaptationEngine implements AdaptationEngine {
     MyProbe myProbe;
     WorkflowEffector myEffector;
     CacheEffector cacheEffector;
+    ConfigurationEffector confEffector;
     AssistanceService assistanceService;
+    
+    
     
     public MyAdaptationEngine(AssistanceService assistanceService) {
     	this.assistanceService = assistanceService;
@@ -30,23 +36,21 @@ public class MyAdaptationEngine implements AdaptationEngine {
     	myProbe.connect(this);
     	myEffector = new WorkflowEffector(assistanceService);
     	cacheEffector = new CacheEffector(assistanceService);
+    	confEffector = new ConfigurationEffector(assistanceService);
     }
     
     public void handleServiceFailure(ServiceDescription service, String opName) {
     	System.err.println("Simple adaptation is trying to handle the failure");
     	this.myEffector.removeService(service);
     	System.err.println("Service "+service.getServiceName()+" has been removed");
-    	this.myEffector.refreshAllServices();
-    	System.err.println("Services have been refreshed");
-    	//assistanceService.applyQoSRequirement(qosRequirementName, descriptions, opName, params)
-    	//assistanceService.addQosRequirement("ReliabilityQoS", new ReliabilityQoS());
-    	//cacheEffector.
-    	//myEffector.refreshAllServices(service.getServiceType(), opName);
-
-    	//assistanceService.invokeCompositeService(ProfileExecutor.profile.getQosRequirement(), null);
+    	//this.myEffector.refreshAllServices();
     	
-    	//System.out.println("The composite service : "+myEffector.getCompositeService());
-    	
+    	//List<ServiceDescription> services = cacheEffector.refreshCache(service, opName);
+    	//ServiceDescription newService = assistanceService.applyQoSRequirement(ProfileExecutor.profile.getQosRequirement(), services, opName, (Object)null);
+    	//myEffector.updateServiceDescription(service, newService);
+    	//System.err.println("New service is :"+newService.getServiceName());
+    	confEffector.setMaxRetryAttempts(1);
+    	//assistanceService.invokeCompositeService(ProfileExecutor.profile.getQosRequirement(), null);   	
     }
 
     public void handleServiceNotFound(String serviceType, String opName) {
@@ -57,7 +61,7 @@ public class MyAdaptationEngine implements AdaptationEngine {
     @Override
     public void start() {
     	assistanceService.getWorkflowProbe().register(myProbe);
-    	myEffector.refreshAllServices();
+    	//myEffector.refreshAllServices();
     }
     
     @Override
