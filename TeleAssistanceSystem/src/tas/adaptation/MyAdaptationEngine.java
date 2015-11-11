@@ -49,7 +49,7 @@ public class MyAdaptationEngine implements AdaptationEngine {
     	//ServiceDescription newService = assistanceService.applyQoSRequirement(ProfileExecutor.profile.getQosRequirement(), services, opName, (Object)null);
     	//myEffector.updateServiceDescription(service, newService);
     	//System.err.println("New service is :"+newService.getServiceName());
-    	confEffector.setMaxRetryAttempts(1);
+    	confEffector.setMaxRetryAttempts(2);
     	//assistanceService.invokeCompositeService(ProfileExecutor.profile.getQosRequirement(), null);   	
     }
 

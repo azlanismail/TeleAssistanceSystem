@@ -40,7 +40,6 @@ public class GamesProbe implements WorkflowProbeInterface {
 	    System.err.println("GamesProbe notifies service failed: " + service.getServiceName());
 	    // Remove service from cache
 	    myAdaptationEngine.setProbe("ServiceFailure");
-	    myAdaptationEngine.setServiceType(service.getServiceType());
 	    myAdaptationEngine.handleServiceFailure(service, opName);
 	}
 	
@@ -49,7 +48,6 @@ public class GamesProbe implements WorkflowProbeInterface {
 	    System.err.println("GamesProbe notifies service operation not found: " + serviceType + opName);
 	    
 	    myAdaptationEngine.setProbe("ServiceNotFound");
-	    myAdaptationEngine.setServiceType(serviceType);
 	    myAdaptationEngine.handleServiceNotFound(serviceType, opName);
 	}
 }

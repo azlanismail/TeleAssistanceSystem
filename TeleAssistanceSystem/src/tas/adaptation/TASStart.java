@@ -130,6 +130,8 @@ public class TASStart {
 	alarm1 = new AlarmService("AlarmService1", "service.alarmService1");
 	alarm1.getServiceDescription().getCustomProperties().put("Cost", 4.0);
 	alarm1.getServiceDescription().setOperationCost("triggerAlarm", 4.0);
+	alarm1.getServiceDescription().getCustomProperties().put("ResponseTime", 11);
+	alarm1.getServiceDescription().setResponseTime(11);
 	alarm1.getServiceDescription().getCustomProperties().put("FailureRate", 0.11);
 	alarm1.addServiceProfile(new ServiceFailureProfile(0.11));
 	alarm1.startService();
@@ -139,6 +141,8 @@ public class TASStart {
 	alarm2.getServiceDescription().getCustomProperties().put("Cost", 12.0);
 	//alarm2.getServiceDescription().getCustomProperties().put("preferred", true);
 	alarm2.getServiceDescription().setOperationCost("triggerAlarm", 12.0);
+	alarm2.getServiceDescription().getCustomProperties().put("ResponseTime", 9);
+	alarm2.getServiceDescription().setResponseTime(9);
 	alarm2.getServiceDescription().getCustomProperties().put("FailureRate", 0.04);
 	alarm2.addServiceProfile(new ServiceFailureProfile(0.04));
 	alarm2.startService();
@@ -147,6 +151,8 @@ public class TASStart {
 	alarm3 = new AlarmService("AlarmService3", "service.alarmService3");
 	alarm3.getServiceDescription().getCustomProperties().put("Cost", 2.0);
 	alarm3.getServiceDescription().setOperationCost("triggerAlarm", 2.0);
+	alarm3.getServiceDescription().getCustomProperties().put("ResponseTime", 3);
+	alarm3.getServiceDescription().setResponseTime(3);
 	alarm3.getServiceDescription().getCustomProperties().put("FailureRate", 0.18);
 	alarm3.addServiceProfile(new ServiceFailureProfile(0.18));
 	alarm3.startService();
@@ -215,6 +221,8 @@ public class TASStart {
 	drugService.getServiceDescription().getCustomProperties().put("Cost", 2.0);
 	drugService.getServiceDescription().setOperationCost("changeDoses", 5.0);
 	drugService.getServiceDescription().setOperationCost("changeDrug", 5.0);
+	drugService.getServiceDescription().getCustomProperties().put("ResponseTime", 1);
+	drugService.getServiceDescription().setResponseTime(1);
 	drugService.getServiceDescription().getCustomProperties().put("FailureRate", 0.01);
 	//drugService.addServiceProfile(new ServiceFailureProfile(0.01));
 	drugService.startService();
