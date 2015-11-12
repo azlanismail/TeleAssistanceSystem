@@ -35,19 +35,19 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    
 	    public void handleServiceFailure(ServiceDescription service, String opName) {
 	    	System.err.println("Handling service failure by games-based adaptation");
-	    	//this.myEffector.removeService(service);
+	    	this.myEffector.removeService(service);
 	    	confEffector.setMaxRetryAttempts(2);
 	    	setServiceType(service.getServiceType());
 	    	setServiceId(service.getRegisterID());
 	    	plan.generatePlan();
-	    	int ch = -1;
+	    	int sid = -1;
 	    	try {
-				ch = plan.getAdaptStrategyfromFile();
+				sid = plan.getAdaptStrategyfromFile();
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	    	newService = assistanceService.getServiceDescription(ch);
+	    	newService = assistanceService.getServiceDescription(sid);
 	    	myEffector.updateServiceDescription(service, newService);
 	    }
 
