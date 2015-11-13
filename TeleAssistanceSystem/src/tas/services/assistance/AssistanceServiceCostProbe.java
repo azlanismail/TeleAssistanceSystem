@@ -113,6 +113,7 @@ public class AssistanceServiceCostProbe implements WorkflowProbeInterface,CostPr
 	public void serviceOperationInvoked(ServiceDescription service,
 			String opName, Object[] params) {
 		// TODO Auto-generated method stub
+		//System.out.println("Service operation invoked from main probe");
 		delays.put(service.getServiceName()+"."+opName, System.currentTimeMillis());
 	}
 

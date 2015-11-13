@@ -41,9 +41,8 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	System.err.println("Handling service failure by games-based adaptation");
 	    	
 	    	confEffector.setMaxRetryAttempts(2);
-	    	cacheEffector.getAllServices(service.getServiceType(), opName);
 	    	this.myEffector.removeService(service);
-	    	
+	    	cacheEffector.getAllServices(service.getServiceType(), opName);
 	    	//start working with games
 	    	setServiceType(service.getServiceType());
 	    	setServiceId(service.getRegisterID());
@@ -59,7 +58,8 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	//get a new one
 	    	newService = cacheEffector.getService(sid);
 	    	System.out.println("The new service selected by games engine is :"+newService.getServiceName());
-	    	myEffector.updateServiceDescription(service, newService);
+	    	assistanceService.setGamesPlan(true);
+	    	assistanceService.setNewService(newService);
 	    	
 	    }
 

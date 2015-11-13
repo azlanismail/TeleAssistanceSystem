@@ -14,6 +14,7 @@ public class ReliabilityQoS implements AbstractQoSRequirement{
 	int index = 0;
 	Double cost;
 	HashMap properties;
+	//System.out.println("Selecting service from ReliabilityQoS class");
 	for (int i = 0; i < serviceDescriptions.size(); i++) {
 	    properties = serviceDescriptions.get(i).getCustomProperties();
 	    if (properties.containsKey("FailureRate")){
