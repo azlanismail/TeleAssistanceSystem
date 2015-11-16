@@ -3,6 +3,8 @@ package tas.adaptation;
 
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import adapt.plan.Planner;
@@ -40,12 +42,13 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    public void handleServiceFailure(ServiceDescription service, String opName) {
 	    	System.err.println("Handling service failure by games-based adaptation");
 	    	
-	    	confEffector.setMaxRetryAttempts(2);
+	    	
 	    	this.myEffector.removeService(service);
 	    	cacheEffector.getAllServices(service.getServiceType(), opName);
+	    	confEffector.setMaxRetryAttempts(2);
 	    	//start working with games
-	    	setServiceType(service.getServiceType());
-	    	setServiceId(service.getRegisterID());
+	    	setFailedServiceType(service.getServiceType());
+	    	setFailedServiceId(service.getRegisterID());
 	    	plan.generatePlan();
 	    	int sid = -1;
 	    	try {
@@ -92,22 +95,50 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	}
 	    }
 	    
-	    public void setServiceType(String serviceType){
+	    public void setFailedServiceType(String serviceType){
 	    	System.out.println("Type detected and sent to the model is :"+serviceType);
 	    	if (serviceType.equalsIgnoreCase("MedicalAnalysisService"))
-	    		plan.setConstantsServiceType(0);
+	    		plan.setConstantsFailedServiceType(0);
 	    	if (serviceType.equalsIgnoreCase("AlarmService"))
-	    		plan.setConstantsServiceType(1);
+	    		plan.setConstantsFailedServiceType(1);
 	    	if (serviceType.equalsIgnoreCase("DrugService"))
-	    		plan.setConstantsServiceType(2);
+	    		plan.setConstantsFailedServiceType(2);
 	    }
 	    
-	    public void setServiceId(int id){
+	    public void setFailedServiceId(int id){
 	    	System.out.println("Id detected and sent to the model is :"+id);
-	    	plan.setConstantsServiceId(id);
+	    	plan.setConstantsFailedServiceId(id);
+	    }
+	    
+	    public void setMaxResponseTime(int maxRT){
+	    	System.out.println("max response time is :"+maxRT);
+	    	plan.setConstantsMaxResponseTime(maxRT);
+	    }
+	    
+	    public void setMaxResponseTime(double maxFR){
+	    	System.out.println("max failure rate is :"+maxFR);
+	    	plan.setConstantsMaxFailureRate(maxFR);
 	    }
 	    	
-	    
+	    public void setServiceProfiles(List<ServiceDescription> services) {
+			
+			HashMap properties;
+	    	double cost = 0.0;
+	    	int responseTime = 0;
+	    	double failureRate = 0.0;
+	    	
+			for (int i = 0; i < services.size(); i++) {
+			    properties = services.get(i).getCustomProperties();
+			    if (properties.containsKey("Cost"))
+			    	cost = (double) properties.get("Cost");
+				if (properties.containsKey("ResponseTime"))
+					responseTime = (int) properties.get("ResponseTime");
+				if (properties.containsKey("FailureRate"))
+					failureRate = (int) properties.get("FailureRate");
+				plan.setConstantsServiceProfile(i,responseTime,cost,failureRate);	    
+			}
+			
+		}
 	    
 	    public void mapStrategywithEffector(int choice){
 	    	int ch = -1;

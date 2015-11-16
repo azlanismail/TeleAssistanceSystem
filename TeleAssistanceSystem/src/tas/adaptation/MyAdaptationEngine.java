@@ -43,14 +43,7 @@ public class MyAdaptationEngine implements AdaptationEngine {
     	System.err.println("Simple adaptation is trying to handle the failure");
     	this.myEffector.removeService(service);
     	System.err.println("Service "+service.getServiceName()+" has been removed");
-    	//this.myEffector.refreshAllServices();
-    	
-    	//List<ServiceDescription> services = cacheEffector.refreshCache(service, opName);
-    	//ServiceDescription newService = assistanceService.applyQoSRequirement(ProfileExecutor.profile.getQosRequirement(), services, opName, (Object)null);
-    	//myEffector.updateServiceDescription(service, newService);
-    	//System.err.println("New service is :"+newService.getServiceName());
-    	confEffector.setMaxRetryAttempts(2);
-    	//assistanceService.invokeCompositeService(ProfileExecutor.profile.getQosRequirement(), null);   	
+    	confEffector.setMaxRetryAttempts(2);   	
     }
 
     public void handleServiceNotFound(String serviceType, String opName) {
@@ -61,7 +54,7 @@ public class MyAdaptationEngine implements AdaptationEngine {
     @Override
     public void start() {
     	assistanceService.getWorkflowProbe().register(myProbe);
-    	//myEffector.refreshAllServices();
+    	myEffector.refreshAllServices();
     }
     
     @Override
