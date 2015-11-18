@@ -273,6 +273,7 @@ public class TASStart {
 	CompositeServiceClient client = new CompositeServiceClient("service.assistance");
 	assistanceService.setWorkflow(workflowPath);
 	workflowEffector.refreshAllServices();
+	
 
 	ProfileExecutor.readFromXml(profilePath);
 	if (ProfileExecutor.profile != null) {
