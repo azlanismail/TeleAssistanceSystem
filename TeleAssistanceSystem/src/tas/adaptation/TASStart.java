@@ -105,6 +105,7 @@ public class TASStart {
     }
 
     public AssistanceServiceCostProbe getMonitor() {
+    	System.out.println("Get monitor is called from TASStart");
 	return monitor;
     }
 
@@ -119,6 +120,7 @@ public class TASStart {
     }
 
     public HashMap<String, AdaptationEngine> getAdaptationEngines() {
+    	System.out.println("getAdaptationEngines is called from  TASStart");
     	return adaptationEngines;
     }
 
@@ -234,6 +236,7 @@ public class TASStart {
 	assistanceService.startService();
 	assistanceService.register();
 	monitor = new AssistanceServiceCostProbe();
+	System.out.println("registering the monitor");
 	assistanceService.getCostProbe().register(monitor);
 	assistanceService.getWorkflowProbe().register(monitor);
 	

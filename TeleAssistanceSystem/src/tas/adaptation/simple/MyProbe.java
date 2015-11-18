@@ -16,6 +16,7 @@ public class MyProbe implements WorkflowProbeInterface {
 		
 	public void connect(MyAdaptationEngine myAdaptationEngine) {
 	    this.myAdaptationEngine = myAdaptationEngine;
+	    System.out.println("Connection between games probe and adaptation engine is made :"+myAdaptationEngine.getName());
 	}
 
 	@Override

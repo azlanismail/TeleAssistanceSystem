@@ -19,6 +19,7 @@ import tas.services.assistance.AssistanceService;
 
 public class GamesAdaptationEngine implements AdaptationEngine {
 
+		String name = "Games-based Adaptation";
 	    GamesProbe myProbe;
 	    WorkflowEffector myEffector;
 	    ConfigurationEffector confEffector;
@@ -49,7 +50,7 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	//start working with games
 	    	setFailedServiceType(service.getServiceType());
 	    	setFailedServiceId(service.getRegisterID());
-	    	plan.generatePlan();
+	    	plan.adaptPlan();
 	    	int sid = -1;
 	    	try {
 				sid = plan.getAdaptStrategyfromFile();
@@ -61,7 +62,7 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	//get a new one
 	    	newService = cacheEffector.getService(sid);
 	    	System.out.println("The new service selected by games engine is :"+newService.getServiceName());
-	    	assistanceService.setGamesPlan(true);
+	    	assistanceService.setGamesAdaptPlan(true);
 	    	assistanceService.setNewService(newService);
 	    	
 	    }
@@ -98,11 +99,11 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    public void setFailedServiceType(String serviceType){
 	    	System.out.println("Type detected and sent to the model is :"+serviceType);
 	    	if (serviceType.equalsIgnoreCase("MedicalAnalysisService"))
-	    		plan.setConstantsFailedServiceType(0);
+	    		plan.setConstantsServiceType(0);
 	    	if (serviceType.equalsIgnoreCase("AlarmService"))
-	    		plan.setConstantsFailedServiceType(1);
+	    		plan.setConstantsServiceType(1);
 	    	if (serviceType.equalsIgnoreCase("DrugService"))
-	    		plan.setConstantsFailedServiceType(2);
+	    		plan.setConstantsServiceType(2);
 	    }
 	    
 	    public void setFailedServiceId(int id){
@@ -142,7 +143,7 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    
 	    public void mapStrategywithEffector(int choice){
 	    	int ch = -1;
-	    	plan.generatePlan();
+	    	plan.adaptPlan();
 	    	try {
 				ch = plan.getAdaptStrategyfromFile();
 			} catch (FileNotFoundException e) {
@@ -164,11 +165,18 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	}
 	    }
 	    
+	    public String getName(){
+	    	return this.name;
+	    }
+	    
 
 	    @Override
 	    public void start() {
+	    	System.out.println("start is calling from GamesAdaptation");
 	    	assistanceService.getWorkflowProbe().register(myProbe);
+	    	assistanceService.setGamesPlan(true);
 	    	this.myEffector.refreshAllServices();
+	    	
 	    }
 	    
 	    @Override

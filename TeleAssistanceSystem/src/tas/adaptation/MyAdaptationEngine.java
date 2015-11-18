@@ -22,6 +22,7 @@ import tas.services.qos.ReliabilityQoS;
  */
 public class MyAdaptationEngine implements AdaptationEngine {
 
+	String name = "Simple Adaptation";
     MyProbe myProbe;
     WorkflowEffector myEffector;
     CacheEffector cacheEffector;
@@ -53,10 +54,15 @@ public class MyAdaptationEngine implements AdaptationEngine {
     	myEffector.refreshAllServices(serviceType, opName);
     }
      
-
+    public String getName(){
+    	return this.name;
+    }
+    
     @Override
     public void start() {
+    	System.out.println("start is calling from Simple Adaptation");
     	assistanceService.getWorkflowProbe().register(myProbe);
+    	assistanceService.setGamesPlan(false);
     	myEffector.refreshAllServices();
     }
     
