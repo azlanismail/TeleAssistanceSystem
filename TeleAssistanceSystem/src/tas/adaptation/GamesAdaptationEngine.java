@@ -43,7 +43,7 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	System.err.println("Handling service failure by games-based adaptation");
 	    	
 	    	
-	    	this.myEffector.removeService(service);
+	    	//this.myEffector.removeService(service);
 	    	cacheEffector.getAllServices(service.getServiceType(), opName);
 	    	confEffector.setMaxRetryAttempts(2);
 	    	//start working with games

@@ -41,9 +41,12 @@ public class MyAdaptationEngine implements AdaptationEngine {
     
     public void handleServiceFailure(ServiceDescription service, String opName) {
     	System.err.println("Simple adaptation is trying to handle the failure");
-    	this.myEffector.removeService(service);
+    	//this.myEffector.removeService(service);
     	System.err.println("Service "+service.getServiceName()+" has been removed");
-    	confEffector.setMaxRetryAttempts(2);   	
+    	confEffector.setMaxRetryAttempts(2); 
+    	this.myEffector.removeService(service);
+    	//ServiceDescription serviceTemp = service;
+    	//System.out.println("retry count is :"+assistanceService.getConfiguration().maxRetryAttempts);
     }
 
     public void handleServiceNotFound(String serviceType, String opName) {
