@@ -78,15 +78,24 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	 //   	this.myEffector.refreshAllServices();
 	 //   }
 	    
-	 //   public void handleServiceOperationTimeout(){
-	 //   	System.err.println("Handling service operation timeout");
-	 //   	mapStratwithEffector();    	
-	 //   }
+	
 	   
 	    /**
 	     * Objective: Provide the input for probe type
 	     * @param probeTy
 	     */
+	    public void setQoSType(String qosType){
+	    	if (qosType.equalsIgnoreCase("CostQoS")) {
+	    		plan.setConstantsGoalType(0);
+	    	}
+	    	else if (qosType.equalsIgnoreCase("ReliabilityQoS")) {
+	    		plan.setConstantsGoalType(1);
+	    	}
+	    	else {
+	    		System.out.println("QoS type cannot be mapped to prism model");
+	    	}
+	    }
+	    
 	    public void setProbe(String probeTy){
 	    	if (probeTy.equalsIgnoreCase("ServiceFailure")) {
 	    		plan.setConstantsProbe(0);
@@ -141,29 +150,7 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 			
 		}
 	    
-	    public void mapStrategywithEffector(int choice){
-	    	int ch = -1;
-	    	plan.adaptPlan();
-	    	try {
-				ch = plan.getAdaptStrategyfromFile();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    	
-	    	switch (ch) {
-	    	case 0: //myEffector.refreshAllServices();
-	    			myEffector.removeService(this.service);
-	    			break;
-	    	case 1: //myEffector.refreshAllServices(this.serviceType, this.operationName);
-	    		    myEffector.removeService(this.service);
-	    			break;
-	    //	case 2: myEffector.updateServiceDescription(oldDes, newDes);
-	    //			break;
-	    	default: System.err.println("no action selected");
-	    			 break;
-	    	}
-	    }
+	   
 	    
 	    public String getName(){
 	    	return this.name;

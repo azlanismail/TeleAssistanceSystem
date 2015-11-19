@@ -18,6 +18,8 @@ public class GamesProbe implements WorkflowProbeInterface {
 	public void workflowStarted(String qosRequirement, Object[] params) {
 	    System.err.println("GamesProbe notifies workflow started");
 	    //Log.addLog("WorkflowStarted", "Workflow Started monitoring");
+	    System.out.println("QoS requirement received by games probe is :"+qosRequirement);
+	    myAdaptationEngine.setQoSType(qosRequirement);
 	}
 
 	@Override
