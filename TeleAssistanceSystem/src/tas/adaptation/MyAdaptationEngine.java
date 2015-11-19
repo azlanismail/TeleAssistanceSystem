@@ -62,7 +62,7 @@ public class MyAdaptationEngine implements AdaptationEngine {
     public void start() {
     	System.out.println("start is calling from Simple Adaptation");
     	assistanceService.getWorkflowProbe().register(myProbe);
-    	assistanceService.setGamesPlan(false);
+    	assistanceService.setGamesPlan(true);
     	myEffector.refreshAllServices();
     }
     
