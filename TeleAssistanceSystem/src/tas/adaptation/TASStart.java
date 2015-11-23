@@ -22,8 +22,10 @@ import tas.services.medical.MedicalAnalysisService;
 import tas.services.profiles.ServiceDelayProfile;
 import tas.services.profiles.ServiceFailureProfile;
 import tas.services.qos.MinCostQoS;
+import tas.services.qos.MinCostQoSGames;
 import tas.services.qos.PreferencesQoS;
 import tas.services.qos.ReliabilityQoS;
+import tas.services.qos.ResponseTimeQoS;
 
 
 public class TASStart {
@@ -245,6 +247,8 @@ public class TASStart {
 	assistanceService.addQosRequirement("ReliabilityQoS", new ReliabilityQoS());
 	assistanceService.addQosRequirement("PreferencesQoS", new PreferencesQoS());
 	assistanceService.addQosRequirement("CostQoS", new MinCostQoS());
+	assistanceService.addQosRequirement("ResponseTimeQoS", new ResponseTimeQoS());
+	assistanceService.addQosRequirement("CostQoSGames", new MinCostQoSGames());
 	
 	workflowEffector = new WorkflowEffector(assistanceService);
 	

@@ -36,7 +36,7 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	myEffector = new WorkflowEffector(assistanceService);
 	    	confEffector = new ConfigurationEffector(assistanceService);
 	    	cacheEffector = new CacheEffector(assistanceService);
-	    	plan = new Planner();
+	    	plan = new Planner(1); //means, the adaptation stage
 	    }
 	    
 	    
@@ -85,11 +85,14 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	     * @param probeTy
 	     */
 	    public void setQoSType(String qosType){
-	    	if (qosType.equalsIgnoreCase("CostQoS")) {
+	    	if (qosType.equalsIgnoreCase("CostQoS") || qosType.equalsIgnoreCase("CostQoSGames")) {
 	    		plan.setConstantsGoalType(0);
 	    	}
-	    	else if (qosType.equalsIgnoreCase("ReliabilityQoS")) {
+	    	else if (qosType.equalsIgnoreCase("ReliabilityQoS") || qosType.equalsIgnoreCase("ReliabilityQoSGames")) {
 	    		plan.setConstantsGoalType(1);
+	    	}
+	    	else if (qosType.equalsIgnoreCase("ResponseTimeQoS") || qosType.equalsIgnoreCase("ResponseTimeQoSGames")) {
+	    		plan.setConstantsGoalType(2);
 	    	}
 	    	else {
 	    		System.out.println("QoS type cannot be mapped to prism model");
@@ -161,7 +164,7 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    public void start() {
 	    	System.out.println("start is calling from GamesAdaptation");
 	    	assistanceService.getWorkflowProbe().register(myProbe);
-	    	assistanceService.setGamesPlan(true);
+	    	//assistanceService.setGamesPlan(true);
 	    	this.myEffector.refreshAllServices();
 	    	
 	    }
