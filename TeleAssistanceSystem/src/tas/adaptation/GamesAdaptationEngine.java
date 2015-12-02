@@ -50,10 +50,10 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	//start working with games
 	    	setFailedServiceType(service.getServiceType());
 	    	setFailedServiceId(service.getRegisterID());
-	    	plan.adaptPlan();
+	    	plan.generate();
 	    	int sid = -1;
 	    	try {
-				sid = plan.getAdaptStrategyfromFile();
+				sid = plan.getAdaptStrategyfromAdv();
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -93,6 +93,9 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	}
 	    	else if (qosType.equalsIgnoreCase("ResponseTimeQoS") || qosType.equalsIgnoreCase("ResponseTimeQoSGames")) {
 	    		plan.setConstantsGoalType(2);
+	    	}
+	    	else if (qosType.equalsIgnoreCase("UtilityQoS")) {
+	    		plan.setConstantsGoalType(3);
 	    	}
 	    	else {
 	    		System.out.println("QoS type cannot be mapped to prism model");

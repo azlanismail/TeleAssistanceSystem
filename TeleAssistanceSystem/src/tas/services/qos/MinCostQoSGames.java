@@ -11,39 +11,36 @@ import service.workflow.AbstractQoSRequirement;
 public class MinCostQoSGames implements AbstractQoSRequirement {
 
 		Planner plan;
-	 @Override
+	 
+		@Override
 	    public ServiceDescription applyQoSRequirement(List<ServiceDescription> serviceDescriptions,String opName,Object[] params) {
 		 
 		 	System.out.println("Begin planning for min cost based on stochastic games");
 		 	
+		 	//params: stage
 			plan = new Planner(0); //which means the initial stage
-     		
-			//set the initial configuration
-			plan.setConstantsGoalType(0);    	 
-     		plan.setConstantsFailedServiceId(-1);
-     		plan.setConstantsProbe(-1);
-     		String serviceType = (String) serviceDescriptions.get(0).getServiceType();
-     		plan.setServiceType(serviceType);
+			
+			//get the service type
+			String serviceType = (String) serviceDescriptions.get(0).getServiceType();
+     		     		
+			//params: goal type, probe, service type, failedServiceId
+     		plan.setConstantsParams(0,-1,serviceType,-1);    		
      		
      		//perform the synthesis
-    		plan.adaptPlan();
+    		plan.generate();
     		
     		//get the selected service
     		int sid = -1;
 	    	try {
-				sid = plan.getAdaptStrategyfromFile();
+				sid = plan.getAdaptStrategyfromAdv();
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	    	//assign the selected service
-	    	    	
-		 
-		 //-------------------------
-	
+	    	
+	    	//assign the selected service	
 			int index = 0;
 			int id = -1;
-			HashMap properties;
 			for (int i = 0; i < serviceDescriptions.size(); i++) {
 			    id = (int) serviceDescriptions.get(i).getRegisterID();
 			    if (id == sid){
