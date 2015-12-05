@@ -25,6 +25,24 @@ public class UtilityQoS implements AbstractQoSRequirement {
 		//params: goal type, probe, service type, failedServiceId
  		plan.setConstantsParams(3,-1,serviceType,-1);    		
  		
+ 		//assign the service profiles to the model
+ 		int ind = -1;
+ 		int rt = 0;
+ 		double cs = 0.0;
+ 		double fr = 0.0;
+ 		HashMap properties;
+ 		for (int i = 0; i < serviceDescriptions.size(); i++) {
+		    ind = (int) serviceDescriptions.get(i).getRegisterID();
+		    properties = serviceDescriptions.get(i).getCustomProperties();
+		    if (properties.containsKey("ResponseTime"))
+		    	rt = (int) properties.get("ResponseTime");
+		    if (properties.containsKey("Cost"))
+		    	cs = (double) properties.get("Cost");
+		    if (properties.containsKey("FailureRate"))
+		    	fr = (double) properties.get("FailureRate");
+		    
+		    plan.setConstantsServiceProfile(ind, rt, cs, fr);
+		}
  		//perform the synthesis
 		plan.generate();
 		
