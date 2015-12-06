@@ -251,7 +251,7 @@ public class TASStart {
 	assistanceService.addQosRequirement("ResponseTimeQoS", new ResponseTimeQoS());
 	assistanceService.addQosRequirement("CostQoSGames", new MinCostQoSGames());
 	assistanceService.addQosRequirement("UtilityQoS", new UtilityQoS());
-	assistanceService.addQosRequirement("MultiQoS", new MultiQoS());
+	//assistanceService.addQosRequirement("MultiQoS", new MultiQoS());
 	
 	workflowEffector = new WorkflowEffector(assistanceService);
 	
