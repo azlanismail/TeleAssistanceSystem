@@ -10,5 +10,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/ResearchServicePlatform"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/PlanningComp"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PlanningComp2"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -27,7 +27,7 @@ import tas.services.qos.PreferencesQoS;
 import tas.services.qos.ReliabilityQoS;
 import tas.services.qos.ResponseTimeQoS;
 import tas.services.qos.UtilityQoS;
-
+import tas.services.qos.MultiQoS;
 
 public class TASStart {
 
@@ -251,6 +251,7 @@ public class TASStart {
 	assistanceService.addQosRequirement("ResponseTimeQoS", new ResponseTimeQoS());
 	assistanceService.addQosRequirement("CostQoSGames", new MinCostQoSGames());
 	assistanceService.addQosRequirement("UtilityQoS", new UtilityQoS());
+	assistanceService.addQosRequirement("MultiQoS", new MultiQoS());
 	
 	workflowEffector = new WorkflowEffector(assistanceService);
 	
