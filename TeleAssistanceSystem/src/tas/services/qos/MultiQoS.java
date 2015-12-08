@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import adapt.multiplan.MultiPlanner;
-import adapt.plan.Planner;
 import service.auxiliary.ServiceDescription;
 import service.workflow.AbstractQoSRequirement;
 
@@ -15,7 +14,7 @@ public class MultiQoS implements AbstractQoSRequirement {
 	@Override
     public ServiceDescription applyQoSRequirement(List<ServiceDescription> serviceDescriptions,String opName,Object[] params) {
 	 
-	 	System.out.println("Begin planning for utility based on stochastic games");
+	 	System.out.println("Begin multi-objective planning based on stochastic games");
 	 	
 		//params: stage
 		plan = new MultiPlanner(0); 

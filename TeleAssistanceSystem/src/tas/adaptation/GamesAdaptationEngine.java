@@ -97,7 +97,9 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	else if (qosType.equalsIgnoreCase("UtilityQoS")) {
 	    		plan.setConstantsGoalType(3);
 	    	}
-	    	else {
+	    	else if (qosType.equalsIgnoreCase("MultiQoS")) {
+	    		plan.setConstantsGoalType(4);
+	    	}else {
 	    		System.out.println("QoS type cannot be mapped to prism model");
 	    	}
 	    }
