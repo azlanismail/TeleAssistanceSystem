@@ -27,6 +27,9 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    AssistanceService assistanceService;
 	    ServiceDescription service, newService;
 	    Planner plan;
+	    int retry;
+	    int compId;
+	    int curCompId;
 	      
 
 	    public GamesAdaptationEngine(AssistanceService assistanceService) {
@@ -37,14 +40,33 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	confEffector = new ConfigurationEffector(assistanceService);
 	    	cacheEffector = new CacheEffector(assistanceService);
 	    	plan = new Planner(1); //means, the adaptation stage
+	
+	    	retry = 0; //initialize the counter
+	    	compId = -1; //initialize the comp id
+	    	curCompId = -1; //initialize the current comp id
 	    }
 	    
+	    public void setCompId(int cid) {
+	    	this.curCompId = cid;
+	    }
+	    
+	    public void setCount(){
+	    	if (compId == curCompId) 
+	    		retry++;
+	    	else {
+	    		System.out.println("not same");
+	    		compId = curCompId;
+	    		retry = 1;
+	    	}
+	    }
 	    
 	    public void handleServiceFailure(ServiceDescription service, String opName) {
 	    	System.err.println("Handling service failure by games-based adaptation");
-	    	
-	    	
 	    	//this.myEffector.removeService(service);
+	    	
+	    	//set the current count for retry
+	    	setCount();
+	    	System.out.println("Current retry is "+retry);
 	    	cacheEffector.getAllServices(service.getServiceType(), opName);
 	    	confEffector.setMaxRetryAttempts(2);
 	    	//start working with games
@@ -77,8 +99,6 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	 //   	System.err.println("Handling service invocation failure");
 	 //   	this.myEffector.refreshAllServices();
 	 //   }
-	    
-	
 	   
 	    /**
 	     * Objective: Provide the input for probe type

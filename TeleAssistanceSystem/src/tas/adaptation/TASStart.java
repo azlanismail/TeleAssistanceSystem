@@ -318,6 +318,7 @@ public class TASStart {
 			pick = (int) values.get(j).getData();
 			//System.out.println("invoke composite service from TASStart");
 			client.invokeCompositeService(ProfileExecutor.profile.getQosRequirement(), patientId, pick);
+			
 			break;
 		    } else
 			valueProbability = valueProbability + values.get(j).getRatio();
