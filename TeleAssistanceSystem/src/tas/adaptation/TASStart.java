@@ -285,6 +285,7 @@ public class TASStart {
 	assistanceService.setWorkflow(workflowPath);
 	workflowEffector.refreshAllServices();
 	
+	
 
 	ProfileExecutor.readFromXml(profilePath);
 	if (ProfileExecutor.profile != null) {
@@ -310,6 +311,7 @@ public class TASStart {
 					}
 	    		}
 	    	}*/
+	    
 	    System.out.println("Executing workflow :"+(currentSteps+1));	    	
 		double probability = rand.nextDouble();
 		double valueProbability = 0;

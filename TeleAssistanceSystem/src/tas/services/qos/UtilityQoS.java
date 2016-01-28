@@ -22,8 +22,9 @@ public class UtilityQoS implements AbstractQoSRequirement {
 		//get the service type
 		String serviceType = (String) serviceDescriptions.get(0).getServiceType();
  		     		
-		//params: goal type, probe, service type, failedServiceId
- 		plan.setConstantsParams(3,-1,serviceType,-1);    		
+		//params: goal type, probe, service type, failedServiceId, retry, wcs, wrt, wfr
+ 		plan.setConstantsParams(3,-1,serviceType,-1, 1, 0.3, 0.3, 0.4);    		
+ 		 		
  		
  		//assign the service profiles to the model
  		int ind = -1;

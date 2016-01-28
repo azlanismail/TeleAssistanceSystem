@@ -23,8 +23,8 @@ public class MinCostQoSGames implements AbstractQoSRequirement {
 			//get the service type
 			String serviceType = (String) serviceDescriptions.get(0).getServiceType();
      		     		
-			//params: goal type, probe, service type, failedServiceId
-     		plan.setConstantsParams(0,-1,serviceType,-1);    		
+			//params: goal type, probe, service type, failedServiceId, retry, wcs, wrt, wfr
+	 		plan.setConstantsParams(0,-1,serviceType,-1, 1, 0.0, 0.0, 0.0);  		
      		
      		//assign the service profiles to the model
      		int ind = -1;

@@ -41,7 +41,7 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	cacheEffector = new CacheEffector(assistanceService);
 	    	plan = new Planner(1); //means, the adaptation stage
 	
-	    	retry = 0; //initialize the counter
+	    	retry = 1; //initialize the counter
 	    	compId = -1; //initialize the comp id
 	    	curCompId = -1; //initialize the current comp id
 	    }
@@ -72,6 +72,8 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	//start working with games
 	    	setFailedServiceType(service.getServiceType());
 	    	setFailedServiceId(service.getRegisterID());
+	    	setRetry(0);
+	    	//get a new one based on the strategy synthesis
 	    	plan.generate();
 	    	int sid = -1;
 	    	try {
@@ -80,8 +82,7 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	    	
-	    	//get a new one
+	    	//int id = strategySynthesis();
 	    	newService = cacheEffector.getService(sid);
 	    	System.out.println("The new service selected by games engine is :"+newService.getServiceName());
 	    	assistanceService.setGamesAdaptPlan(true);
@@ -99,6 +100,23 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	 //   	System.err.println("Handling service invocation failure");
 	 //   	this.myEffector.refreshAllServices();
 	 //   }
+	    
+	    /**
+	     * Objective: call generate() from Planner to synthesize the strategy
+	     * @return
+	     */
+	    public int strategySynthesis() {
+	    	plan.generate();
+	    	int sid = -1;
+	    	try {
+				sid = plan.getAdaptStrategyfromAdv();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	
+	    	return sid;
+	    }
 	   
 	    /**
 	     * Objective: Provide the input for probe type
@@ -107,15 +125,19 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    public void setQoSType(String qosType){
 	    	if (qosType.equalsIgnoreCase("CostQoS") || qosType.equalsIgnoreCase("CostQoSGames")) {
 	    		plan.setConstantsGoalType(0);
+	    		setUtilWeight(0.0,0.0,0.0);
 	    	}
 	    	else if (qosType.equalsIgnoreCase("ReliabilityQoS") || qosType.equalsIgnoreCase("ReliabilityQoSGames")) {
 	    		plan.setConstantsGoalType(1);
+	    		setUtilWeight(0.0,0.0,0.0);
 	    	}
 	    	else if (qosType.equalsIgnoreCase("ResponseTimeQoS") || qosType.equalsIgnoreCase("ResponseTimeQoSGames")) {
 	    		plan.setConstantsGoalType(2);
+	    		setUtilWeight(0.0,0.0,0.0);
 	    	}
 	    	else if (qosType.equalsIgnoreCase("UtilityQoS")) {
 	    		plan.setConstantsGoalType(3);
+	    		setUtilWeight(0.3,0.3,0.4);
 	    	}
 	    	else if (qosType.equalsIgnoreCase("MultiQoS")) {
 	    		plan.setConstantsGoalType(4);
@@ -178,7 +200,13 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 			
 		}
 	    
+	    public void setRetry(int limit) {
+	    	plan.setConstantsRetry(limit);
+	    }
 	   
+	    public void setUtilWeight(double wcs, double wrt, double wfr) {
+	    	plan.setConstantsUtilWeight(wcs, wrt, wfr);
+	    }
 	    
 	    public String getName(){
 	    	return this.name;
