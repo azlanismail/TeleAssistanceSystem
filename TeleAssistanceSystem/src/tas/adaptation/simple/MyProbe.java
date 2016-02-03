@@ -2,8 +2,8 @@ package tas.adaptation.simple;
 
 import service.adaptation.probes.interfaces.WorkflowProbeInterface;
 import service.auxiliary.ServiceDescription;
-//import tas.adaptation.MyAdaptationEngine;
-import tas.adaptation.DefaultAdaptationEngine;
+import tas.adaptation.MyAdaptationEngine;
+//import tas.adaptation.DefaultAdaptationEngine;
 import tas.services.log.Log;
 
 /**
@@ -13,9 +13,9 @@ import tas.services.log.Log;
  */
 public class MyProbe implements WorkflowProbeInterface {
 
-	DefaultAdaptationEngine myAdaptationEngine;
+	MyAdaptationEngine myAdaptationEngine;
 		
-	public void connect(DefaultAdaptationEngine myAdaptationEngine) {
+	public void connect(MyAdaptationEngine myAdaptationEngine) {
 	    this.myAdaptationEngine = myAdaptationEngine;
 	  //  System.out.println("Connection between normal probe and no adaptation is made :"+myAdaptationEngine.getName());
 	}
@@ -46,7 +46,7 @@ public class MyProbe implements WorkflowProbeInterface {
 	public void serviceOperationTimeout(ServiceDescription service, String opName, Object[] params) {
 	    System.err.println("Service Operation Timeout by MyProbe: " + service.getServiceName());
 	    // Remove service from cache
-	  //  myAdaptationEngine.handleServiceFailure(service, opName);
+	    myAdaptationEngine.handleServiceFailure(service, opName);
 	}
 	
 	@Override

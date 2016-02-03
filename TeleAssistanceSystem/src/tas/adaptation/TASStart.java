@@ -25,7 +25,9 @@ import tas.services.qos.MinCostQoS;
 import tas.services.qos.MinCostQoSGames;
 import tas.services.qos.PreferencesQoS;
 import tas.services.qos.ReliabilityQoS;
+import tas.services.qos.ReliabilityQoSGames;
 import tas.services.qos.ResponseTimeQoS;
+import tas.services.qos.ResponseTimeQoSGames;
 import tas.services.qos.UtilityQoS;
 import tas.services.qos.MultiQoS;
 
@@ -250,6 +252,8 @@ public class TASStart {
 	assistanceService.addQosRequirement("CostQoS", new MinCostQoS());
 	assistanceService.addQosRequirement("ResponseTimeQoS", new ResponseTimeQoS());
 	assistanceService.addQosRequirement("CostQoSGames", new MinCostQoSGames());
+	assistanceService.addQosRequirement("ResponseTimeQoSGames", new ResponseTimeQoSGames());
+	assistanceService.addQosRequirement("ReliabilityQoSGames", new ReliabilityQoSGames());
 	assistanceService.addQosRequirement("UtilityQoS", new UtilityQoS());
 	//assistanceService.addQosRequirement("MultiQoS", new MultiQoS());
 	
