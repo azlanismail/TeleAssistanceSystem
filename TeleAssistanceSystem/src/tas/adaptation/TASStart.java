@@ -22,7 +22,7 @@ import tas.services.medical.MedicalAnalysisService;
 import tas.services.profiles.ServiceDelayProfile;
 import tas.services.profiles.ServiceFailureProfile;
 import tas.services.qos.MinCostQoS;
-import tas.services.qos.MinCostQoSGames;
+import tas.services.qos.CostQoSGames;
 import tas.services.qos.PreferencesQoS;
 import tas.services.qos.ReliabilityQoS;
 import tas.services.qos.ReliabilityQoSGames;
@@ -251,7 +251,7 @@ public class TASStart {
 	assistanceService.addQosRequirement("PreferencesQoS", new PreferencesQoS());
 	assistanceService.addQosRequirement("CostQoS", new MinCostQoS());
 	assistanceService.addQosRequirement("ResponseTimeQoS", new ResponseTimeQoS());
-	assistanceService.addQosRequirement("CostQoSGames", new MinCostQoSGames());
+	assistanceService.addQosRequirement("CostQoSGames", new CostQoSGames());
 	assistanceService.addQosRequirement("ResponseTimeQoSGames", new ResponseTimeQoSGames());
 	assistanceService.addQosRequirement("ReliabilityQoSGames", new ReliabilityQoSGames());
 	assistanceService.addQosRequirement("UtilityQoS", new UtilityQoS());

@@ -68,9 +68,10 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    	setCount();
 	    	System.out.println("Current retry is "+retry);
 	    	cacheEffector.getAllServices(service.getServiceType(), opName);
-	    	confEffector.setMaxRetryAttempts(2);
+	    	confEffector.setMaxRetryAttempts(3);
 	    	//start working with games
 	    	setFailedServiceType(service.getServiceType());
+	    	setOperationName(opName);
 	    	setFailedServiceId(service.getRegisterID());
 	    	setRetry(0);
 	    	//get a new one based on the strategy synthesis
@@ -123,7 +124,7 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	     * @param probeTy
 	     */
 	    public void setQoSType(String qosType){
-	    	if (qosType.equalsIgnoreCase("CostQoS") || qosType.equalsIgnoreCase("CostQoSGames")) {
+	    	if (qosType.equalsIgnoreCase("CostQoS") || qosType.equalsIgnoreCase("CostQoSGames") || qosType.equalsIgnoreCase("MinCostQoSGames")) {
 	    		plan.setConstantsGoalType(0);
 	    		setUtilWeight(0.0,0.0,0.0);
 	    	}
@@ -163,6 +164,10 @@ public class GamesAdaptationEngine implements AdaptationEngine {
 	    		plan.setConstantsServiceType(1);
 	    	if (serviceType.equalsIgnoreCase("DrugService"))
 	    		plan.setConstantsServiceType(2);
+	    }
+	    
+	    public void setOperationName(String opName){
+	    	System.out.println("operation detected is :"+opName);
 	    }
 	    
 	    public void setFailedServiceId(int id){
